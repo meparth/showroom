@@ -1,9 +1,9 @@
 public class HeavyVehicle extends Vehicle {
     protected double weight;
 
-    HeavyVehicle(int modelNumber, int enginePower, double tireSize, double weight) {
+    HeavyVehicle(int modelNumber, int enginePower, String tireSize, double weight) {
         this.modelNumber = modelNumber;
-        this.engineType = "diesel";
+        this.engineType = 3;
         this.enginePower = enginePower;
         this.tireSize = tireSize;
         this.weight = weight;

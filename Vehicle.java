@@ -1,17 +1,19 @@
+import java.util.*;
 // package showroom;
 
 public class Vehicle {
-
     protected int modelNumber;
-    protected String engineType;
+    protected int engineType;
     protected int enginePower;
-    protected double tireSize;
+    protected String tireSize;
+
+    
 
     Vehicle(){
         this.modelNumber = 1;
-        this.engineType = "oil";
+        this.engineType = 1;
         this.enginePower = 520;
-        this.tireSize = 3.33;
+        this.tireSize = "P225/70R16 91S";
     }
     
     public static void emne(){

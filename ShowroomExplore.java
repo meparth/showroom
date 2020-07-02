@@ -2,23 +2,25 @@ import java.util.Scanner;
 public class ShowroomExplore{
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
-        
-        // ManageShowroom showroom = new ManageShowroom();
 
-        System.out.println("option 1, 2, 3");
-        int option = scanner.nextInt();
-        if(option==1){
-            System.out.println("option 5, 6, 7");
-            System.out.print(">>>");
-            int anotheroption = scanner.nextInt();
-            if(anotheroption==5){
-                System.out.println("option 4");
-                int yetanotheroption = scanner.nextInt();
-                if(yetanotheroption==4){
-                    System.out.println("yu passed.");
-                }
-            }
-        }
+        
+        
+        ManageShowroom showroom = new ManageShowroom();
+        showroom.welcomeRequest();
+        // System.out.println("option 1, 2, 3");
+        // int option = scanner.nextInt();
+        // if(option==1){
+        //     System.out.println("option 5, 6, 7");
+        //     System.out.print(">>>");
+        //     int anotheroption = scanner.nextInt();
+        //     if(anotheroption==5){
+        //         System.out.println("option 4");
+        //         int yetanotheroption = scanner.nextInt();
+        //         if(yetanotheroption==4){
+        //             System.out.println("yu passed.");
+        //         }
+        //     }
+        // }
 
 
         // showroom.addVehicle();
