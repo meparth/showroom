@@ -176,7 +176,7 @@ public class ManageShowroom {
     }
 
     private void showVisitors() {
-        System.out.format("\n>> The current expected visited count is %d\n\n", nVisitors);
+        System.out.format("\n>> The current expected visitor count is %d\n\n", nVisitors);
     }
 
     private void showVehiclesHeader(){
@@ -237,13 +237,13 @@ public class ManageShowroom {
             prettyPrintVehicle(currentVehicle, 3, i+j+k);
         }
         
-        System.out.println("---done---");
+        System.out.println("\n");
     }
 
     // the prompts for descriptions of vehicles while adding new ones
     private String promptModelNumber(){
         System.out.println("* Enter the Model Number:");
-        return (String) getOption("String");
+        return (String)getOption("string");
     }
     private int promptEnginePower(){
         System.out.println("* Enter Engine Power (in HP):");
@@ -260,7 +260,7 @@ public class ManageShowroom {
         return ((int) getOption("int") == 1);
     }
     private double promptWeight(){
-        System.out.println("* Enter the weights of the vehicle:");
+        System.out.println("* Enter the weights of the vehicle (in kg):");
         return (double)getOption("double");
     }
     private int promptEngineType(){
