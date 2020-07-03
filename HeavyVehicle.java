@@ -1,3 +1,4 @@
+package showroom;
 public class HeavyVehicle extends Vehicle {
     protected double weight;
 

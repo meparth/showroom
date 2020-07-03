@@ -1,3 +1,4 @@
+package showroom;
 import java.util.*;
 public class ManageShowroom {
     protected Scanner scanner = new Scanner(System.in);
@@ -186,13 +187,13 @@ public class ManageShowroom {
     private void prettyPrintVehicle(Object vehicle, int type, int serial) {
         /**
          * a particular vehicle can be printed with this
-         * types: normal (1), sports (2), heavy (3)
+         * type: normal (1), sports (2), heavy (3)
+         * serial: index of the vehicle in the list
          */
         serial++;
         int enginePower;
-        String modelNumber, tireSize, turbo = "N/A", weight = "N/A";
+        String modelNumber, tireSize, engineType, turbo = "N/A", weight = "N/A";
         String vehicleType = vehicleTypeMap.get(type);
-        String engineType;
         if(type==1){
             NormalVehicle v = (NormalVehicle) vehicle;
             modelNumber = v.modelNumber;

@@ -1,5 +1,5 @@
+package showroom;
 import java.util.*;
-// package showroom;
 
 public class Vehicle {
     // should be private and use get set
