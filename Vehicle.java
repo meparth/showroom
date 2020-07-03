@@ -2,7 +2,8 @@ import java.util.*;
 // package showroom;
 
 public class Vehicle {
-    protected String modelNumber; // this should be String
+    // should be private and use get set
+    protected String modelNumber;
     protected int engineType;
     protected int enginePower;
     protected String tireSize;
@@ -16,13 +17,13 @@ public class Vehicle {
         this.tireSize = "P225/70R16 91S";
     }
     
-    public static void emne(){
-        System.out.println("------Emne called-------");
+    // public static void emne(){
+    //     System.out.println("------Emne called-------");
 
-    }
-    public void shout(){
-        System.out.println("Shout called againnnnnn");
-    }
+    // }
+    // public void shout(){
+    //     System.out.println("Shout called againnnnnn");
+    // }
 
     public void getDetails(){
         System.out.print("Model: ");
