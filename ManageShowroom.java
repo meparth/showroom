@@ -219,8 +219,6 @@ public class ManageShowroom {
     }
     
     private void showVehicles() {
-        // prettify :|
-
         // serial no, vehicle type
         showVehiclesHeader();
         int i, j, k;
