@@ -2,7 +2,7 @@ import java.util.*;
 // package showroom;
 
 public class Vehicle {
-    protected int modelNumber;
+    protected String modelNumber; // this should be String
     protected int engineType;
     protected int enginePower;
     protected String tireSize;
@@ -10,7 +10,7 @@ public class Vehicle {
     
 
     Vehicle(){
-        this.modelNumber = 1;
+        this.modelNumber = "Toyota Premio";
         this.engineType = 1;
         this.enginePower = 520;
         this.tireSize = "P225/70R16 91S";

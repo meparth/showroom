@@ -1,7 +1,7 @@
 public class SportsVehicle extends Vehicle {
     protected boolean turbo;
 
-    SportsVehicle(int modelNumber, int enginePower, String tireSize, boolean turbo) {
+    SportsVehicle(String modelNumber, int enginePower, String tireSize, boolean turbo) {
         this.modelNumber = modelNumber;
         this.engineType = 1;
         this.enginePower = enginePower;

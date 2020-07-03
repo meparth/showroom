@@ -1,5 +1,5 @@
 public class NormalVehicle extends Vehicle {
-    NormalVehicle(int modelNumber, int engineType, int enginePower, String tireSize) {
+    NormalVehicle(String modelNumber, int engineType, int enginePower, String tireSize) {
         
         this.modelNumber = modelNumber;
         this.engineType = engineType;
