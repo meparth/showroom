@@ -1,6 +1,6 @@
 package showroom;
 public class HeavyVehicle extends Vehicle {
-    protected double weight;
+    private double weight;
 
     HeavyVehicle(String modelNumber, int enginePower, String tireSize, double weight) {
         this.modelNumber = modelNumber;
@@ -8,5 +8,11 @@ public class HeavyVehicle extends Vehicle {
         this.enginePower = enginePower;
         this.tireSize = tireSize;
         this.weight = weight;
+    }
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+    public double getWeight() {
+        return weight;
     }
 }

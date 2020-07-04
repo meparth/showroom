@@ -1,14 +1,39 @@
 package showroom;
 import java.util.*;
-
 public class Vehicle {
-    // should be private and use get set
-    protected String modelNumber;
-    protected int engineType;
-    protected int enginePower;
-    protected String tireSize;
+    private String modelNumber;
+    private int engineType;
+    private int enginePower;
+    private String tireSize;
 
+    public static Map<Integer, String> engineTypeMap;
+    public static Map<String, Integer> engineTypeMapRev;
+    public static Map<Integer, String> vehicleTypeMap;
+    public static Map<String, Integer> vehicleTypeMapRev;
     
+    {
+        engineTypeMap = new HashMap<>();
+        engineTypeMap.put(1, "oil");
+        engineTypeMap.put(2, "gas");
+        engineTypeMap.put(3, "diesel");
+
+        engineTypeMapRev = new HashMap<>();
+        engineTypeMapRev.put("oil", 1);
+        engineTypeMapRev.put("gas", 2);
+        engineTypeMapRev.put("diesel", 3);
+        
+
+        vehicleTypeMap = new HashMap<>();
+        vehicleTypeMap.put(1, "Normal");
+        vehicleTypeMap.put(2, "Sports");
+        vehicleTypeMap.put(3, "Heavy");
+
+        vehicleTypeMapRev = new HashMap<>();
+        vehicleTypeMapRev.put("Normal", 1);
+        vehicleTypeMapRev.put("Sports", 2);
+        vehicleTypeMapRev.put("Heavy", 3);
+
+    }
 
     Vehicle(){
         this.modelNumber = "Toyota Premio";
@@ -17,24 +42,30 @@ public class Vehicle {
         this.tireSize = "P225/70R16 91S";
     }
     
-    // public static void emne(){
-    //     System.out.println("------Emne called-------");
-
-    // }
-    // public void shout(){
-    //     System.out.println("Shout called againnnnnn");
-    // }
-
-    public void getDetails(){
-        System.out.print("Model: ");
-        System.out.print(this.modelNumber);
-        System.out.print("\nEngine Type: ");
-        System.out.print(this.engineType);
-        System.out.print("Engine Power: ");
-        System.out.print(this.enginePower);
-        System.out.print("\nTire Size: ");
-        System.out.print(this.tireSize);
-        System.out.print("\n");
+    
+    public String getModelNumber() {
+        return modelNumber;
+    }
+    public int getEnginePower() {
+        return enginePower;
+    }
+    public int getEngineType() {
+        return engineType;
+    }
+    public String getTireSize() {
+        return tireSize;
+    }
+    public void setModelNumber(String modelNumber) {
+        this.modelNumber = modelNumber;
+    }
+    public void setEnginePower(int enginePower) {
+        this.enginePower = enginePower;
+    }
+    public void setEngineType(int engineType) {
+        this.engineType = engineType;
+    }
+    public void setTireSize(String tireSize) {
+        this.tireSize = tireSize;
     }
 
 
