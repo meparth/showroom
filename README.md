@@ -1,5 +1,5 @@
 # showroom
- a vehicle showroom
+a vehicle showroom
 
 to compile: 
 C:\Users\Partha\Documents\java>javac -d showroom showroom\ShowroomExplore.java
