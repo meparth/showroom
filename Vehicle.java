@@ -22,7 +22,6 @@ public class Vehicle {
         engineTypeMapRev.put("gas", 2);
         engineTypeMapRev.put("diesel", 3);
         
-
         vehicleTypeMap = new HashMap<>();
         vehicleTypeMap.put(1, "Normal");
         vehicleTypeMap.put(2, "Sports");

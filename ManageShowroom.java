@@ -3,33 +3,21 @@ import java.util.*;
 public class ManageShowroom {
     protected Scanner scanner = new Scanner(System.in);
     private int nVisitors;
+    private int nVisitorsForSports;
     // why not array?
     private ArrayList<NormalVehicle> listNormalVehicle;
     private ArrayList<SportsVehicle> listSportsVehicle;
     private ArrayList<HeavyVehicle> listHeavyVehicle;
-
-    // public static Map<Integer, String> engineTypeMap;
-    // public static Map<Integer, String> vehicleTypeMap;
-
    
     ManageShowroom(){
         nVisitors = 30;
-        // engineTypeMap = new HashMap<>();
-        // engineTypeMap.put(1, "oil");
-        // engineTypeMap.put(2, "gas");
-        // engineTypeMap.put(3, "diesel");
-
-        // vehicleTypeMap = new HashMap<>();
-        // vehicleTypeMap.put(1, "Normal");
-        // vehicleTypeMap.put(2, "Sports");
-        // vehicleTypeMap.put(3, "Heavy");
-
+        nVisitorsForSports = 20;
         listNormalVehicle = new ArrayList<>();
         listSportsVehicle = new ArrayList<>();
         listHeavyVehicle = new ArrayList<>();
         welcome();
 
-        // random 
+        // random init
         NormalVehicle newNormalVehicle = new NormalVehicle("112", 1, 123, "DDS3");
         listNormalVehicle.add(newNormalVehicle);
         NormalVehicle anotherNewNormalVehicle = new NormalVehicle("11", 2, 11, "HHHY6");
@@ -49,6 +37,7 @@ public class ManageShowroom {
     
     protected Object getOption(String type){
         /**
+         * helper function to get inputs from user
          * call with "int" for getting typical integer responses from user
          * "string" for getting a string response
          * "bool" for boolean response
@@ -76,7 +65,7 @@ public class ManageShowroom {
         /**
          * The very first prompt that'd be shown to the user
          */
-        System.out.println("* What do you want to do?\n" +
+        System.out.println("\n* What do you want to do?\n" +
                             "  enter ( 1 ) for adding a new vehicle\n"+
                             "  enter ( 2 ) for removing a vehicle\n"+
                             "  enter ( 3 ) for inquiry\n"+
@@ -98,7 +87,7 @@ public class ManageShowroom {
 
 
     protected void addVehicle(){
-        System.out.println("* What type of vehicle do you want to add?\n" +
+        System.out.println("\n* What type of vehicle do you want to add?\n" +
                             "  enter ( 1 ) for Normal Vehicle\n"+
                             "  enter ( 2 ) for Sports Vehicle\n"+
                             "  enter ( 3 ) for Heavy Vehicle\n");
@@ -109,18 +98,19 @@ public class ManageShowroom {
         else if(option==2) addSportsVehicle();
         else if(option==3) addHeavyVehicle();
         else{
-            System.out.println(">> Please enter a valid option!\n");
+            System.out.println("\n>> Please enter a valid option!\n");
             addVehicle();
         } 
     }
 
     
     private void removeParticularVehicle(int type, int choice){
-        if(type==1){
+        if(type==Vehicle.vehicleTypeMapRev.get("Normal")){
             listNormalVehicle.remove(choice-1);
-        }else if(type==2){
+        }else if(type==Vehicle.vehicleTypeMapRev.get("Sports")){
             listSportsVehicle.remove(choice-1);
-        }else if(type==3){
+            nVisitors-=nVisitorsForSports;
+        }else if(type==Vehicle.vehicleTypeMapRev.get("Heavy")){
             listHeavyVehicle.remove(choice-1);
         }
     }
@@ -128,12 +118,12 @@ public class ManageShowroom {
         // what type to be removed -> which one (show a list)
         // remove and adjust nVisitor
 
-        System.out.println("* Which type of vehicle do you want to remove?\n"+
+        System.out.println("\n* Which type of vehicle do you want to remove?\n"+
                             "  enter ( 1 ) for Normal Vehicle\n"+
                             "  enter ( 2 ) for Sports Vehicle\n"+
                             "  enter ( 3 ) for Heavy Vehicle\n");
         int type = (int)getOption("int"); 
-
+        showVehiclesHeader();
         if(type==1){
             //normal
             for(int i=0 ; i<listNormalVehicle.size() ; i++){
@@ -152,10 +142,11 @@ public class ManageShowroom {
         }else{
             // err
         }
-        System.out.println("* Of the above, which one do you want to remove?\n");
+        System.out.println("\n* Of the above, which one do you want to remove?\n");
         int choice = (int)getOption("int");
         removeParticularVehicle(type, choice);
-
+        // confirm done
+        System.out.println("\n>> Vehicle is removed from the showroom.");
     }
 
     protected void inquire(){
@@ -163,7 +154,7 @@ public class ManageShowroom {
          * The user can see a list of all the vehicles and number of visitors
          * So there will be two options for inquiry
          */
-        System.out.println("* What do you wish to see?\n" +
+        System.out.println("\n* What do you wish to see?\n" +
                             "  enter ( 1 ) for list of vehicles\n" +
                             "  enter ( 2 ) for expected visitor count");
         int option = (int)getOption("int");
@@ -181,8 +172,9 @@ public class ManageShowroom {
     }
 
     private void showVehiclesHeader(){
-        System.out.format("  %3s %15s %20s %15s %10s %10s %10s %10s\n",   "#", "Vehicle Type", "Model No.", "Engine Type", "Power", "Tire", "Turbo", "Weight");
-        System.out.format("  %3s %15s %20s %15s %10s %10s %10s %10s\n", "---", "------------", "---------", "-----------", "-----", "----", "-----", "------");
+        System.out.format("\n\n  %3s %15s %20s %15s %10s %10s %10s %10s\n",   "#", "Vehicle Type", "Model No.", "Engine Type", "Power", "Tire", "Turbo", "Weight");
+        System.out.format(    "  %3s %15s %20s %15s %10s %10s %10s %10s\n", "---", "------------", "---------", "-----------", "-----", "----", "-----", "------");
+        System.out.println();
     }
     private void prettyPrintVehicle(Object vehicle, int type, int serial) {
         /**
@@ -241,29 +233,29 @@ public class ManageShowroom {
 
     // the prompts for descriptions of vehicles while adding new ones
     private String promptModelNumber(){
-        System.out.println("* Enter the Model Number:");
+        System.out.println("\n* Enter the Model Number:");
         return (String)getOption("string");
     }
     private int promptEnginePower(){
-        System.out.println("* Enter Engine Power (in HP):");
+        System.out.println("\n* Enter Engine Power (in HP):");
         return (int)getOption("int");
     }
     private String promptTireSize(){
-        System.out.println("* Enter the code for the tire size:");
+        System.out.println("\n* Enter the code for the tire size:");
         return (String)getOption("string");
     }
     private boolean promptTurbo(){
-        System.out.println("* Enter if the vehicle is turbo enabled:\n"+
+        System.out.println("\n* Enter if the vehicle is turbo enabled:\n"+
                             "  enter ( 1 ) for yes,\n"+
                             "  enter ( 0 ) for no.");
         return ((int) getOption("int") == 1);
     }
     private double promptWeight(){
-        System.out.println("* Enter the weights of the vehicle (in kg):");
+        System.out.println("\n* Enter the weights of the vehicle (in kg):");
         return (double)getOption("double");
     }
     private int promptEngineType(){
-        System.out.println("* What is the Engine type?\n"+
+        System.out.println("\n* What is the Engine type?\n"+
                             "  enter ( 1 ) for oil type,\n"+
                             "  enter ( 2 ) for gas type,\n"+
                             "  enter ( 3 ) for diesel type");
@@ -304,7 +296,7 @@ public class ManageShowroom {
 
         SportsVehicle newSportsVehicle = new SportsVehicle(modelNumber, enginePower, tireSize, turbo);
         listSportsVehicle.add(newSportsVehicle);
-        nVisitors+=20;
+        nVisitors+=nVisitorsForSports;
         confirmAdded();
     }
 
