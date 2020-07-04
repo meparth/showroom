@@ -8,21 +8,21 @@ public class ManageShowroom {
     private ArrayList<SportsVehicle> listSportsVehicle;
     private ArrayList<HeavyVehicle> listHeavyVehicle;
 
-    public static Map<Integer, String> engineTypeMap;
-    public static Map<Integer, String> vehicleTypeMap;
+    // public static Map<Integer, String> engineTypeMap;
+    // public static Map<Integer, String> vehicleTypeMap;
 
    
     ManageShowroom(){
         nVisitors = 30;
-        engineTypeMap = new HashMap<>();
-        engineTypeMap.put(1, "oil");
-        engineTypeMap.put(2, "gas");
-        engineTypeMap.put(3, "diesel");
+        // engineTypeMap = new HashMap<>();
+        // engineTypeMap.put(1, "oil");
+        // engineTypeMap.put(2, "gas");
+        // engineTypeMap.put(3, "diesel");
 
-        vehicleTypeMap = new HashMap<>();
-        vehicleTypeMap.put(1, "Normal");
-        vehicleTypeMap.put(2, "Sports");
-        vehicleTypeMap.put(3, "Heavy");
+        // vehicleTypeMap = new HashMap<>();
+        // vehicleTypeMap.put(1, "Normal");
+        // vehicleTypeMap.put(2, "Sports");
+        // vehicleTypeMap.put(3, "Heavy");
 
         listNormalVehicle = new ArrayList<>();
         listSportsVehicle = new ArrayList<>();
@@ -193,27 +193,27 @@ public class ManageShowroom {
         serial++;
         int enginePower;
         String modelNumber, tireSize, engineType, turbo = "N/A", weight = "N/A";
-        String vehicleType = vehicleTypeMap.get(type);
+        String vehicleType = Vehicle.vehicleTypeMap.get(type);
         if(type==1){
             NormalVehicle v = (NormalVehicle) vehicle;
-            modelNumber = v.modelNumber;
-            enginePower = v.enginePower;
-            engineType = engineTypeMap.get(v.engineType);
-            tireSize = v.tireSize;            
+            modelNumber = v.getModelNumber();
+            enginePower = v.getEnginePower();
+            engineType = Vehicle.engineTypeMap.get(v.getEngineType());
+            tireSize = v.getTireSize();
         }else if(type==2){
             SportsVehicle v = (SportsVehicle) vehicle;
-            modelNumber = v.modelNumber;
-            enginePower = v.enginePower;
-            engineType = engineTypeMap.get(v.engineType);
-            tireSize = v.tireSize;  
-            turbo = (v.turbo?"Yes":"No");
+            modelNumber = v.getModelNumber();
+            enginePower = v.getEnginePower();
+            engineType = Vehicle.engineTypeMap.get(v.getEngineType());
+            tireSize = v.getTireSize();
+            turbo = (v.getTurbo() ? "Yes" : "No");
         }else{
             HeavyVehicle v = (HeavyVehicle) vehicle;
-            modelNumber = v.modelNumber;
-            enginePower = v.enginePower;
-            engineType = engineTypeMap.get(v.engineType);
-            tireSize = v.tireSize;  
-            weight = String.valueOf(v.weight);
+            modelNumber = v.getModelNumber();
+            enginePower = v.getEnginePower();
+            engineType = Vehicle.engineTypeMap.get(v.getEngineType());
+            tireSize = v.getTireSize();
+            weight = String.valueOf(v.getWeight());
         }
         System.out.format("  %3d %15s %20s %15s %10d %10s %10s %10s\n", 
                     serial, vehicleType, modelNumber, engineType, enginePower, tireSize, turbo, weight);
