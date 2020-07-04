@@ -1,7 +1,6 @@
 package showroom;
 public class HeavyVehicle extends Vehicle {
     private double weight;
-
     HeavyVehicle(String modelNumber, int enginePower, String tireSize, double weight) {
         setModelNumber(modelNumber);
         setEngineType(Vehicle.engineTypeMapRev.get("diesel"));

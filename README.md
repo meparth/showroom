@@ -1,7 +1,9 @@
 # showroom
 a vehicle showroom
 
+The main class is ShowroomExplore. 
+
 to compile: 
-C:\Users\Partha\Documents\java>javac -d showroom showroom\ShowroomExplore.java
+C:\Users\@#$%\Documents\java>javac -d showroom showroom\ShowroomExplore.java
 to run: 
-C:\Users\Partha\Documents\java>java showroom.ShowroomExplore
+C:\Users\@#$%\Documents\java>java showroom.ShowroomExplore

@@ -15,6 +15,8 @@ public class ManageShowroom {
         listNormalVehicle = new ArrayList<>();
         listSportsVehicle = new ArrayList<>();
         listHeavyVehicle = new ArrayList<>();
+
+        // calling the welcome texts
         welcome();
 
         // random init
@@ -25,6 +27,9 @@ public class ManageShowroom {
     }
 
     private void welcome(){
+        /**
+         * welcome screen with fancy lettering
+         */
         System.out.println("\n\n\n\n");
         for(int i=0 ; i<25 ; i++) System.out.format("  *");
         System.out.format("\n%60s\n", "Welcome to Vehicle Showroom Exploration!");
@@ -37,11 +42,12 @@ public class ManageShowroom {
     
     protected Object getOption(String type){
         /**
-         * helper function to get inputs from user
-         * call with "int" for getting typical integer responses from user
-         * "string" for getting a string response
-         * "bool" for boolean response
-         * "double" for double response
+         * A helper function to get inputs from user
+         * type: "int" for getting typical integer responses from user
+         *       "string" for getting a string response
+         *       "bool" for boolean response
+         *       "double" for double response
+         * cast the returned object to desirable data type
          */
         System.out.print(">>> ");
 
@@ -63,7 +69,8 @@ public class ManageShowroom {
    
     protected void welcomeRequest(){
         /**
-         * The very first prompt that'd be shown to the user
+         * The very first prompt to be shown to the user
+         * After a request is processed, this will be called again.
          */
         System.out.println("\n* What do you want to do?\n" +
                             "  enter ( 1 ) for adding a new vehicle\n"+
@@ -77,7 +84,7 @@ public class ManageShowroom {
         else if(option==2) removeVehicle();
         else if(option==3) inquire();
         else if(option==4){
-            System.out.println("\n  Goodbye!\n");
+            System.out.println("\n ** Goodbye! **\n");
             return;
         }else{
             // err
@@ -87,24 +94,32 @@ public class ManageShowroom {
 
 
     protected void addVehicle(){
+        /**
+         * This is to be called while adding a new vehicle
+         * At first the type of the vehicle will be asked and will be 
+         * redirected to respective vehicle adding methods 
+         */
         System.out.println("\n* What type of vehicle do you want to add?\n" +
                             "  enter ( 1 ) for Normal Vehicle\n"+
                             "  enter ( 2 ) for Sports Vehicle\n"+
                             "  enter ( 3 ) for Heavy Vehicle\n");
 
         int option = (int)getOption("int"); 
-        // this can be integrated with all three methods
-        if(option==1) addNormalVehicle();
-        else if(option==2) addSportsVehicle();
-        else if(option==3) addHeavyVehicle();
+        if(option==Vehicle.vehicleTypeMapRev.get("Normal")) addNormalVehicle();
+        else if(option==Vehicle.vehicleTypeMapRev.get("Sports")) addSportsVehicle();
+        else if(option==Vehicle.vehicleTypeMapRev.get("Heavy")) addHeavyVehicle();
         else{
             System.out.println("\n>> Please enter a valid option!\n");
+            // letting the user try again!
             addVehicle();
         } 
     }
 
     
     private void removeParticularVehicle(int type, int choice){
+        /**
+         * Given the type of the vehicle and index, it will be removed here.
+         */
         if(type==Vehicle.vehicleTypeMapRev.get("Normal")){
             listNormalVehicle.remove(choice-1);
         }else if(type==Vehicle.vehicleTypeMapRev.get("Sports")){
@@ -115,8 +130,10 @@ public class ManageShowroom {
         }
     }
     protected void removeVehicle(){
-        // what type to be removed -> which one (show a list)
-        // remove and adjust nVisitor
+        /**
+         * To remove a vehicle, at first the type of the removable vehicle will be prompted
+         * Then a list of the desired vehicle will be shown
+         */
 
         System.out.println("\n* Which type of vehicle do you want to remove?\n"+
                             "  enter ( 1 ) for Normal Vehicle\n"+
@@ -124,18 +141,15 @@ public class ManageShowroom {
                             "  enter ( 3 ) for Heavy Vehicle\n");
         int type = (int)getOption("int"); 
         showVehiclesHeader();
-        if(type==1){
-            //normal
+        if(type==Vehicle.vehicleTypeMapRev.get("Normal")){
             for(int i=0 ; i<listNormalVehicle.size() ; i++){
                 prettyPrintVehicle(listNormalVehicle.get(i), type, i);
             }
-        }else if(type==2){
-            //sports
+        }else if(type==Vehicle.vehicleTypeMapRev.get("Sports")){
             for(int i=0 ; i<listSportsVehicle.size() ; i++){
                 prettyPrintVehicle(listSportsVehicle.get(i), type, i);
             }
-        }else if(type==3){
-            //heavy
+        }else if(type==Vehicle.vehicleTypeMapRev.get("Heavy")){
             for(int i=0 ; i<listHeavyVehicle.size() ; i++){
                 prettyPrintVehicle(listHeavyVehicle.get(i), type, i);
             }
@@ -168,68 +182,82 @@ public class ManageShowroom {
     }
 
     private void showVisitors() {
+        /**
+         * Shows current visitor count
+         */
         System.out.format("\n>> The current expected visitor count is %d\n\n", nVisitors);
     }
 
     private void showVehiclesHeader(){
+        /**
+         * This function is called whenever a list of vehicle details is needed
+         * prints the header of that table.
+         */
         System.out.format("\n\n  %3s %15s %20s %15s %10s %10s %10s %10s\n",   "#", "Vehicle Type", "Model No.", "Engine Type", "Power", "Tire", "Turbo", "Weight");
         System.out.format(    "  %3s %15s %20s %15s %10s %10s %10s %10s\n", "---", "------------", "---------", "-----------", "-----", "----", "-----", "------");
         System.out.println();
     }
+
     private void prettyPrintVehicle(Object vehicle, int type, int serial) {
         /**
-         * a particular vehicle can be printed with this
-         * type: normal (1), sports (2), heavy (3)
-         * serial: index of the vehicle in the list
+         * A particular vehicle can be printed with this
+         * type:   (1) normal, (2) sports, (3) heavy 
+         * serial: (index+1) of the vehicle in the list
          */
+
         serial++;
-        int enginePower;
-        String modelNumber, tireSize, engineType, turbo = "N/A", weight = "N/A";
+        int enginePower = 0;
+        String modelNumber = "", tireSize = "", engineType = "", turbo = "N/A", weight = "N/A";
         String vehicleType = Vehicle.vehicleTypeMap.get(type);
-        if(type==1){
+        if(type==Vehicle.vehicleTypeMapRev.get("Normal")){
             NormalVehicle v = (NormalVehicle) vehicle;
             modelNumber = v.getModelNumber();
             enginePower = v.getEnginePower();
             engineType = Vehicle.engineTypeMap.get(v.getEngineType());
             tireSize = v.getTireSize();
-        }else if(type==2){
+        }else if(type==Vehicle.vehicleTypeMapRev.get("Sports")){
             SportsVehicle v = (SportsVehicle) vehicle;
             modelNumber = v.getModelNumber();
             enginePower = v.getEnginePower();
             engineType = Vehicle.engineTypeMap.get(v.getEngineType());
             tireSize = v.getTireSize();
-            turbo = (v.getTurbo() ? "Yes" : "No");
-        }else{
+            turbo = (v.isTurbo() ? "Yes" : "No");
+        }else if(type==Vehicle.vehicleTypeMapRev.get("Heavy")){
             HeavyVehicle v = (HeavyVehicle) vehicle;
             modelNumber = v.getModelNumber();
             enginePower = v.getEnginePower();
             engineType = Vehicle.engineTypeMap.get(v.getEngineType());
             tireSize = v.getTireSize();
             weight = String.valueOf(v.getWeight());
+        }else{
+            // err?
         }
         System.out.format("  %3d %15s %20s %15s %10d %10s %10s %10s\n", 
                     serial, vehicleType, modelNumber, engineType, enginePower, tireSize, turbo, weight);
     }
     
     private void showVehicles() {
-        // serial no, vehicle type
+        /**
+         * showVehicles() prints the details of all vehicles of all types
+         */
         showVehiclesHeader();
         int i, j, k;
         for(i=0 ; i<listNormalVehicle.size() ; i++){
             NormalVehicle currentVehicle = listNormalVehicle.get(i);
-            prettyPrintVehicle(currentVehicle, 1, i);
+            prettyPrintVehicle(currentVehicle, Vehicle.vehicleTypeMapRev.get("Normal"), i);
         }
         for(j=0 ; j<listSportsVehicle.size() ; j++){
             SportsVehicle currentVehicle = listSportsVehicle.get(j);
-            prettyPrintVehicle(currentVehicle, 2, i+j);
+            prettyPrintVehicle(currentVehicle, Vehicle.vehicleTypeMapRev.get("Sports"), i+j);
         }
         for(k=0 ; k<listHeavyVehicle.size() ; k++){
             HeavyVehicle currentVehicle = listHeavyVehicle.get(k);
-            prettyPrintVehicle(currentVehicle, 3, i+j+k);
+            prettyPrintVehicle(currentVehicle, Vehicle.vehicleTypeMapRev.get("Heavy"), i+j+k);
         }
         
         System.out.println("\n");
     }
+
 
     // the prompts for descriptions of vehicles while adding new ones
     private String promptModelNumber(){
@@ -265,9 +293,12 @@ public class ManageShowroom {
         System.out.println("\n>> The vehicle has been added!\n");
     }
 
+
+
     protected void addNormalVehicle() {
         /**
-         * useful info: model no, engine type, engine power, tire size
+         * Gets information from user and creates a normal vehicle
+         * needed info: model no, engine type, engine power, tire size
          */
         String modelNumber = promptModelNumber();
         int engineType = promptEngineType();
@@ -278,8 +309,7 @@ public class ManageShowroom {
         String tireSize = promptTireSize();
         
         NormalVehicle newNormalVehicle = new NormalVehicle(modelNumber, engineType, enginePower, tireSize);
-        listNormalVehicle.add(newNormalVehicle);
-
+        listNormalVehicle.add(newNormalVehicle); 
         confirmAdded();
     }
 
@@ -287,6 +317,7 @@ public class ManageShowroom {
 
     protected void addSportsVehicle(){
         /**
+         * Gets information from user and creates a sport vehicle
          * useful info: model no, engine power, tire size, turbo
          */
         String modelNumber = promptModelNumber();
@@ -302,6 +333,7 @@ public class ManageShowroom {
 
     protected void addHeavyVehicle(){
         /**
+         * Gets information from user and creates a heavy vehicle
          * useful info: model no, engine power, tire size, weight
          */
         String modelNumber = promptModelNumber();

@@ -12,7 +12,7 @@ public class SportsVehicle extends Vehicle {
     public void setTurbo(Boolean turbo) {
         this.turbo = turbo;
     }
-    public Boolean getTurbo(){
+    public Boolean isTurbo(){
         return turbo;
     }
     
