@@ -7,7 +7,7 @@ to compile:
 `C:\Users\@#$%\Documents\java>javac -d showroom showroom\ShowroomExplore.java`
 
 to run: 
-`C:\Users\@#$%\Documents\java>java showroom.ShowroomExplore`
+`C:\Users\@#$%\Documents\java>showroom>java showroom.ShowroomExplore`
 
 This program has the following functionalities:
 * Adding a new vehicle of any of three types (normal, sports, heavy) to showroom
