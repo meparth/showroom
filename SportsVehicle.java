@@ -1,18 +1,17 @@
 package showroom;
 public class SportsVehicle extends Vehicle {
-    private Boolean turbo;
-
-    SportsVehicle(String modelNumber, int enginePower, String tireSize, Boolean turbo) {
+    private boolean turbo;
+    SportsVehicle(String modelNumber, int enginePower, String tireSize, boolean turbo) {
         setModelNumber(modelNumber);
         setEngineType(Vehicle.engineTypeMapRev.get("oil"));
         setEnginePower(enginePower);
         setTireSize(tireSize);
         setTurbo(turbo);
     }
-    public void setTurbo(Boolean turbo) {
+    public void setTurbo(boolean turbo) {
         this.turbo = turbo;
     }
-    public Boolean isTurbo(){
+    public boolean isTurbo(){
         return turbo;
     }
     

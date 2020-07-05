@@ -4,11 +4,10 @@ public class ManageShowroom {
     protected Scanner scanner = new Scanner(System.in);
     private int nVisitors;
     private int nVisitorsForSports;
-    // why not array?
     private ArrayList<NormalVehicle> listNormalVehicle;
     private ArrayList<SportsVehicle> listSportsVehicle;
     private ArrayList<HeavyVehicle> listHeavyVehicle;
-   
+
     ManageShowroom(){
         nVisitors = 30;
         nVisitorsForSports = 20;
@@ -51,18 +50,25 @@ public class ManageShowroom {
          */
         System.out.print(">>> ");
 
-        switch(type){
-            case "int":
-                return scanner.nextInt();
-            case "string":
-                scanner.nextLine();
-                return scanner.nextLine();
-            case "bool":
-                return scanner.nextBoolean();
-            case "double":
-                return scanner.nextDouble();
-        }
+        try {
+            switch(type){
+                case "int":
+                    return scanner.nextInt();
+                case "string":
+                    scanner.nextLine();
+                    return scanner.nextLine();
+                case "bool":
+                    return scanner.nextBoolean();
+                case "double":
+                    return scanner.nextDouble();
+            }
             
+        } catch (Exception e) {
+            System.out.println("\n>> Encountered an error. Let's try this again!");
+            scanner.nextLine();
+            welcomeRequest();
+        }
+        
         return (Object) null;
     }
     
@@ -87,7 +93,7 @@ public class ManageShowroom {
             System.out.println("\n ** Goodbye! **\n");
             return;
         }else{
-            // err
+            System.out.println("\n>> Please enter a valid option!\n");
         }
         welcomeRequest(); 
     }
@@ -110,25 +116,10 @@ public class ManageShowroom {
         else if(option==Vehicle.vehicleTypeMapRev.get("Heavy")) addHeavyVehicle();
         else{
             System.out.println("\n>> Please enter a valid option!\n");
-            // letting the user try again!
             addVehicle();
         } 
     }
 
-    
-    private void removeParticularVehicle(int type, int choice){
-        /**
-         * Given the type of the vehicle and index, it will be removed here.
-         */
-        if(type==Vehicle.vehicleTypeMapRev.get("Normal")){
-            listNormalVehicle.remove(choice-1);
-        }else if(type==Vehicle.vehicleTypeMapRev.get("Sports")){
-            listSportsVehicle.remove(choice-1);
-            nVisitors-=nVisitorsForSports;
-        }else if(type==Vehicle.vehicleTypeMapRev.get("Heavy")){
-            listHeavyVehicle.remove(choice-1);
-        }
-    }
     protected void removeVehicle(){
         /**
          * To remove a vehicle, at first the type of the removable vehicle will be prompted
@@ -154,13 +145,29 @@ public class ManageShowroom {
                 prettyPrintVehicle(listHeavyVehicle.get(i), type, i);
             }
         }else{
-            // err
+            System.out.println("\n>> Please enter a valid option!\n");
+            removeVehicle();
+            return;
         }
         System.out.println("\n* Of the above, which one do you want to remove?\n");
         int choice = (int)getOption("int");
         removeParticularVehicle(type, choice);
         // confirm done
         System.out.println("\n>> Vehicle is removed from the showroom.");
+    }
+    
+    private void removeParticularVehicle(int type, int choice){
+        /**
+         * Given the type of the vehicle and index, it will be removed here.
+         */
+        if(type==Vehicle.vehicleTypeMapRev.get("Normal")){
+            listNormalVehicle.remove(choice-1);
+        }else if(type==Vehicle.vehicleTypeMapRev.get("Sports")){
+            listSportsVehicle.remove(choice-1);
+            nVisitors-=nVisitorsForSports;
+        }else if(type==Vehicle.vehicleTypeMapRev.get("Heavy")){
+            listHeavyVehicle.remove(choice-1);
+        }
     }
 
     protected void inquire(){
@@ -177,7 +184,8 @@ public class ManageShowroom {
         }else if(option==2){
             showVisitors();
         }else{
-            // wat
+            System.out.println("\n>> Please enter a valid option!\n");
+            inquire();
         }
     }
 
@@ -289,10 +297,10 @@ public class ManageShowroom {
                             "  enter ( 3 ) for diesel type");
         return (int)getOption("int");
     }
+
     private void confirmAdded(){
         System.out.println("\n>> The vehicle has been added!\n");
     }
-
 
 
     protected void addNormalVehicle() {
@@ -303,7 +311,9 @@ public class ManageShowroom {
         String modelNumber = promptModelNumber();
         int engineType = promptEngineType();
         if(engineType!=1 || engineType!=2 || engineType!=3){
-            // error, check this.
+            System.out.println("\n>> Please enter a valid option!\n");
+            addNormalVehicle();
+            return;
         }
         int enginePower = promptEnginePower();
         String tireSize = promptTireSize();
@@ -323,7 +333,7 @@ public class ManageShowroom {
         String modelNumber = promptModelNumber();
         int enginePower = promptEnginePower();
         String tireSize = promptTireSize();
-        Boolean turbo = promptTurbo();
+        boolean turbo = promptTurbo();
 
         SportsVehicle newSportsVehicle = new SportsVehicle(modelNumber, enginePower, tireSize, turbo);
         listSportsVehicle.add(newSportsVehicle);
