@@ -19,10 +19,10 @@ public class ManageShowroom {
         welcome();
 
         // random init
-        NormalVehicle newNormalVehicle = new NormalVehicle("112", 1, 123, "DDS3");
-        listNormalVehicle.add(newNormalVehicle);
-        NormalVehicle anotherNewNormalVehicle = new NormalVehicle("11", 2, 11, "HHHY6");
-        listNormalVehicle.add(anotherNewNormalVehicle);
+        // NormalVehicle newNormalVehicle = new NormalVehicle("112", 1, 123, "DDS3");
+        // listNormalVehicle.add(newNormalVehicle);
+        // NormalVehicle anotherNewNormalVehicle = new NormalVehicle("11", 2, 11, "HHHY6");
+        // listNormalVehicle.add(anotherNewNormalVehicle);
     }
 
     private void welcome(){
@@ -120,6 +120,10 @@ public class ManageShowroom {
         } 
     }
 
+    protected void removingNotPossible(){
+        System.out.println("\n>> Sorry, there is no vehicle listed in the preferred selection!");
+    }
+
     protected void removeVehicle(){
         /**
          * To remove a vehicle, at first the type of the removable vehicle will be prompted
@@ -133,14 +137,29 @@ public class ManageShowroom {
         int type = (int)getOption("int"); 
         showVehiclesHeader();
         if(type==Vehicle.vehicleTypeMapRev.get("Normal")){
+            if(listNormalVehicle.size()==0){
+                removingNotPossible();
+                welcomeRequest();
+                return;
+            }
             for(int i=0 ; i<listNormalVehicle.size() ; i++){
                 prettyPrintVehicle(listNormalVehicle.get(i), type, i);
             }
         }else if(type==Vehicle.vehicleTypeMapRev.get("Sports")){
+            if(listSportsVehicle.size()==0){
+                removingNotPossible();
+                welcomeRequest();
+                return;
+            }
             for(int i=0 ; i<listSportsVehicle.size() ; i++){
                 prettyPrintVehicle(listSportsVehicle.get(i), type, i);
             }
         }else if(type==Vehicle.vehicleTypeMapRev.get("Heavy")){
+            if(listHeavyVehicle.size()==0){
+                removingNotPossible();
+                welcomeRequest();
+                return;
+            }
             for(int i=0 ; i<listHeavyVehicle.size() ; i++){
                 prettyPrintVehicle(listHeavyVehicle.get(i), type, i);
             }
@@ -151,7 +170,13 @@ public class ManageShowroom {
         }
         System.out.println("\n* Of the above, which one do you want to remove?\n");
         int choice = (int)getOption("int");
-        removeParticularVehicle(type, choice);
+
+        try{
+            removeParticularVehicle(type, choice);
+        }catch(Exception e){
+            System.out.println("\n>> An error occurred");
+            return;
+        }
         // confirm done
         System.out.println("\n>> Vehicle is removed from the showroom.");
     }
@@ -310,7 +335,7 @@ public class ManageShowroom {
          */
         String modelNumber = promptModelNumber();
         int engineType = promptEngineType();
-        if(engineType!=1 || engineType!=2 || engineType!=3){
+        if(engineType!=1 && engineType!=2 && engineType!=3){
             System.out.println("\n>> Please enter a valid option!\n");
             addNormalVehicle();
             return;
