@@ -17,12 +17,6 @@ public class ManageShowroom {
 
         // calling the welcome texts
         welcome();
-
-        // random init
-        // NormalVehicle newNormalVehicle = new NormalVehicle("112", 1, 123, "DDS3");
-        // listNormalVehicle.add(newNormalVehicle);
-        // NormalVehicle anotherNewNormalVehicle = new NormalVehicle("11", 2, 11, "HHHY6");
-        // listNormalVehicle.add(anotherNewNormalVehicle);
     }
 
     private void welcome(){
@@ -68,7 +62,6 @@ public class ManageShowroom {
             scanner.nextLine();
             welcomeRequest();
         }
-        
         return (Object) null;
     }
     
@@ -135,11 +128,9 @@ public class ManageShowroom {
                             "  enter ( 2 ) for Sports Vehicle\n"+
                             "  enter ( 3 ) for Heavy Vehicle\n");
         int type = (int)getOption("int"); 
-        // showVehiclesHeader();
         if(type==Vehicle.vehicleTypeMapRev.get("Normal")){
             if(listNormalVehicle.size()==0){
                 removingNotPossible();
-                // welcomeRequest();
                 return;
             }
             showVehiclesHeader();
@@ -149,7 +140,6 @@ public class ManageShowroom {
         }else if(type==Vehicle.vehicleTypeMapRev.get("Sports")){
             if(listSportsVehicle.size()==0){
                 removingNotPossible();
-                // welcomeRequest();
                 return;
             }
             showVehiclesHeader();
@@ -159,7 +149,6 @@ public class ManageShowroom {
         }else if(type==Vehicle.vehicleTypeMapRev.get("Heavy")){
             if(listHeavyVehicle.size()==0){
                 removingNotPossible();
-                // welcomeRequest();
                 return;
             }
             showVehiclesHeader();
