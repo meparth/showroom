@@ -11,7 +11,7 @@ public class Vehicle {
     public static Map<Integer, String> vehicleTypeMap;
     public static Map<String, Integer> vehicleTypeMapRev;
     
-    {
+    static {
         engineTypeMap = new HashMap<>();
         engineTypeMap.put(1, "oil");
         engineTypeMap.put(2, "gas");

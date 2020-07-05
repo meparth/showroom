@@ -1,7 +1,7 @@
 package showroom;
 import java.util.*;
 public class ManageShowroom {
-    protected Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
     private int nVisitors;
     private int nVisitorsForSports;
     private ArrayList<NormalVehicle> listNormalVehicle;
@@ -135,31 +135,34 @@ public class ManageShowroom {
                             "  enter ( 2 ) for Sports Vehicle\n"+
                             "  enter ( 3 ) for Heavy Vehicle\n");
         int type = (int)getOption("int"); 
-        showVehiclesHeader();
+        // showVehiclesHeader();
         if(type==Vehicle.vehicleTypeMapRev.get("Normal")){
             if(listNormalVehicle.size()==0){
                 removingNotPossible();
-                welcomeRequest();
+                // welcomeRequest();
                 return;
             }
+            showVehiclesHeader();
             for(int i=0 ; i<listNormalVehicle.size() ; i++){
                 prettyPrintVehicle(listNormalVehicle.get(i), type, i);
             }
         }else if(type==Vehicle.vehicleTypeMapRev.get("Sports")){
             if(listSportsVehicle.size()==0){
                 removingNotPossible();
-                welcomeRequest();
+                // welcomeRequest();
                 return;
             }
+            showVehiclesHeader();
             for(int i=0 ; i<listSportsVehicle.size() ; i++){
                 prettyPrintVehicle(listSportsVehicle.get(i), type, i);
             }
         }else if(type==Vehicle.vehicleTypeMapRev.get("Heavy")){
             if(listHeavyVehicle.size()==0){
                 removingNotPossible();
-                welcomeRequest();
+                // welcomeRequest();
                 return;
             }
+            showVehiclesHeader();
             for(int i=0 ; i<listHeavyVehicle.size() ; i++){
                 prettyPrintVehicle(listHeavyVehicle.get(i), type, i);
             }
